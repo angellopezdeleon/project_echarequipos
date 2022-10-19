@@ -1,5 +1,6 @@
 import * as React from "react";
 import dayjs from "dayjs";
+import 'dayjs/locale/es';
 import Stack from "@mui/material/Stack";
 import TextField from "@mui/material/TextField";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
@@ -34,14 +35,15 @@ export default function DateSelector() {
       "septiembre",
       "octubre",
       "noviembre",
-      "diciembre"
+      "diciembre",
     ];
     return monthName[month];
   }
 
   function handleAccepted(event) {
     setValue(event);
-    const date = "El " + event.$D + " de " + monthSelector(event.$M) + " de " + event.$y;
+    const date =
+      "El " + event.$D + " de " + monthSelector(event.$M) + " de " + event.$y;
     const completeDate = event.$d;
     let newUserData = {
       day: date,
@@ -52,7 +54,10 @@ export default function DateSelector() {
   }
 
   return (
-    <LocalizationProvider dateAdapter={AdapterDayjs}>
+    <LocalizationProvider
+      adapterLocale='es'
+      dateAdapter={AdapterDayjs}
+    >
       <Stack spacing={3}>
         <MobileDatePicker
           label="Fecha de partido"
