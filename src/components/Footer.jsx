@@ -24,7 +24,7 @@ export default function Footer() {
           textColor: 'white'
         }}
       >
-        <p style={pStyle}>Desarrollado por Ángel LdeL</p>
+        <p style={pStyle}>Desarrollado por Ángel López de León</p>
       </Box>
     </div>
   );

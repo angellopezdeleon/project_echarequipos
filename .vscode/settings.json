@@ -1,0 +1,6 @@
+{
+    "typescript.suppressAllWarnings": true,
+    "typescript.suppressDiagnosticCodes": [
+        "tslint:*"
+    ],
+}

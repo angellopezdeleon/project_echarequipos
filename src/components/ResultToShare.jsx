@@ -1,21 +1,68 @@
-import React from "react";
-import { useContext } from "react";
+import React, {
+    useEffect,
+    setError,
+    setIsLoading,
+    useState,
+    useContext,
+} from "react";
 import { formContext } from "../contexts/FormsContext";
+import { useNavigate, useLocation } from "react-router-dom";
 import PlayersDuel from "./result/PlayersDuel";
-import "./result/resultToShare.css"
+import getQuoteBySport from "./../services/quotesAPI";
+import "./result/resultToShare.css";
 
 function ResultToShare() {
-  const context = useContext(formContext);
+    const navigate = useNavigate();
+    const location = useLocation();
 
-  return (
-    <div className="containResults">
-      {context.form.day ? <h1>Convocatoria para {context.form.day}</h1> : null}
-      <PlayersDuel props={context.form} />
-      {context.form.time ? <p>A las {context.form.time}</p> : null}
-      {context.form.sport ? <p>Para jugar al {context.form.sport}</p> : null}
-      {context.form.address ? <p>En {context.form.address}</p> : null}
-    </div>
-  );
+    const { form, resrtartForm } = useContext(formContext);
+    let [data, setData] = useState({});
+    const [error, setError] = useState(false);
+    const [isLoading, setIsLoading] = useState(true);
+
+    useEffect(() => {
+        if (form.sport) {
+            getQuoteBySport(form.sport)
+                .then((respuestaDatos) => {
+                    setData(
+                        respuestaDatos[
+                            Math.floor(Math.random() * respuestaDatos.length)
+                        ]
+                    );
+                    setIsLoading(false);
+                })
+                .catch((error) => {
+                    console.error(error);
+                    setError(true);
+                });
+        } else {
+            setIsLoading(false);
+        }
+    }, []);
+
+    useEffect(() => {
+        window.onbeforeunload = () => {
+            navigate("/");
+            resrtartForm();
+        };
+    }, []);
+
+    return (
+        <div className="containResults">
+            {form.day ? <h1>Convocatoria para {form.day}</h1> : null}
+            {isLoading ? (
+                <p>Cargando...</p>
+            ) : (
+                <>
+                    <PlayersDuel props={form} />
+                    {form.time ? <p>A las {form.time}</p> : null}
+                    {form.sport ? <p>Para jugar al {form.sport}</p> : null}
+                    {form.sport ? <p>{data.phrase}</p> : null}
+                    {form.address ? <p>En {form.address}</p> : null}
+                </>
+            )}
+        </div>
+    );
 }
 
 export default ResultToShare;

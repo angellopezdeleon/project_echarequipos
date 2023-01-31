@@ -4,8 +4,9 @@ import CardContent from "@mui/material/CardContent";
 import Typography from "@mui/material/Typography";
 
 export default function TeamCard(props) {
+
   let { id, team } = props;
-  console.log("%cTeamCard.jsx line:19 teams", "color: #008800;", props);
+  
   return (
     <Card sx={{ margin: 1 }}>
       <CardContent>
