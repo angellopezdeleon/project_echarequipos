@@ -12,12 +12,14 @@ import { formContext } from "../../contexts/FormsContext";
 
 // This key was created specifically for the demo in mui.com.
 // You need to create a new one for your application.
-const GOOGLE_MAPS_API_KEY = "AIzaSyAlcHVQ6Lhi4vgwEBrAd8lt5nRBsSO92ys";
+const GOOGLE_MAPS_API_KEY = process.env.REACT_APP_G_MAPS;
 
 function loadScript(src, position, id) {
   if (!position) {
     return;
   }
+
+  console.log(GOOGLE_MAPS_API_KEY);
 
   const script = document.createElement("script");
   script.setAttribute("async", "");

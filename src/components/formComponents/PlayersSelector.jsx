@@ -71,7 +71,6 @@ export default function PlayersSelector({ children }) {
     }
 
     const handlePasteFromButton = async (event) => {
-        
         const clipboardData = await navigator.clipboard.readText();
         if (!clipboardData.trim()) {
             return;
