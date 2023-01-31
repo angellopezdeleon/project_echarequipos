@@ -11,7 +11,7 @@ export default function FormContextProvider({ children }) {
     console.log("form es:  ", newForm);
 }
 
-  function resrtartForm() {
+  function restartForm() {
     setForm({});
   }
 
@@ -21,7 +21,7 @@ export default function FormContextProvider({ children }) {
       value={{
         form,
         addElement,
-        resrtartForm,
+        restartForm,
       }}
     >
       {children}

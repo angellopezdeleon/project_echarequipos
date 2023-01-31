@@ -9,7 +9,7 @@ function ResultToShare() {
     const navigate = useNavigate();
     const location = useLocation();
 
-    const { form, resrtartForm } = useContext(formContext);
+    const { form, restartForm } = useContext(formContext);
     let [data, setData] = useState({});
     const [error, setError] = useState(false);
     const [isLoading, setIsLoading] = useState(true);
@@ -37,7 +37,7 @@ function ResultToShare() {
     useEffect(() => {
         window.onbeforeunload = () => {
             navigate("/");
-            resrtartForm();
+            restartForm();
         };
     }, []);
 
