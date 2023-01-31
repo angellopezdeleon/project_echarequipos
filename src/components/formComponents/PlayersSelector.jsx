@@ -3,7 +3,6 @@ import Autocomplete from "@mui/material/Autocomplete";
 import TextField from "@mui/material/TextField";
 import { useContext, useState } from "react";
 import { formContext } from "../../contexts/FormsContext";
-// import { Chip } from "@mui/material";
 
 export default function PlayersSelector({ children }) {
 
@@ -81,20 +80,12 @@ export default function PlayersSelector({ children }) {
         handleChange();
     }
 
-    // function renderOption(option) {
-    //     return (
-    //         <Chip label={option}/>
-    //     );
-    // }
-
     return (
         <Autocomplete
             multiple
             autoSelect
             id="tags-filled"
             options={[]}
-            // renderOption={renderOption}
-            // noOptionsText={"Pulsar enter para crear un nuevo jugador o pegar una lista de nombres"}
             value={value}
             inputValue={inputValue}
             popupIcon={""}

@@ -1,17 +1,14 @@
-import * as React from "react";
-import Box from "@mui/material/Box";
-import Grid from "@mui/material/Grid";
-import Button from "@mui/material/Button";
+import React, { useContext, useState } from "react";
+import { Link } from "react-router-dom";
+import { Box, Grid, Button, FormControl } from "@mui/material";
+import { formContext } from "../contexts/FormsContext";
 import SportSelector from "./formComponents/SportSelector";
 import GoogleMaps from "./formComponents/MapsAutocomplete";
-import { Link } from "react-router-dom";
 import DateSelector from "./formComponents/DateSelector";
 import TimeSelector from "./formComponents/TimeSelector";
-import { useContext, useState } from "react";
-import { formContext } from "../contexts/FormsContext";
-import FormControl from "@mui/material/FormControl";
 import PlayersSelector from "./formComponents/PlayersSelector";
 import TeamsSelector from "./formComponents/TeamsSelector";
+
 
 export default function Form() {
 

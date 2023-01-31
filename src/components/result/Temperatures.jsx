@@ -1,8 +1,4 @@
-import React from "react";
-import TeamCard from "./TeamCard";
-import { useState, useEffect } from "react";
-import { Box } from "@mui/material";
-import { Grid } from "@mui/material";
+import React, { useState, useEffect } from "react";
 
 export default function Temperatures(props) {
 
@@ -61,7 +57,6 @@ function getTemperature(latitude, longitude) {
   )
     .then((response) => response.json())
     .then((data) => {
-      //            console.log(data);
       let temp = Math.round(data.main.temp - 273.15);
       provideTemperature(temp);
     });

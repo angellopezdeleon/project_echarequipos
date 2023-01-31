@@ -1,10 +1,4 @@
-import React, {
-    useEffect,
-    setError,
-    setIsLoading,
-    useState,
-    useContext,
-} from "react";
+import React, { useEffect, setError, setIsLoading, useState, useContext } from "react";
 import { formContext } from "../contexts/FormsContext";
 import { useNavigate, useLocation } from "react-router-dom";
 import PlayersDuel from "./result/PlayersDuel";

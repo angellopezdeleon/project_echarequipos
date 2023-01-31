@@ -1,12 +1,12 @@
-import { Container } from "@mui/material";
 import React from 'react';
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import FormContextProvider from "./contexts/FormsContext";
+import { Container } from "@mui/material";
 import Form from "./components/Form";
 import Header from "./components/Header";
 import Footer from "./components/Footer";
-import "./App.css";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
 import ResultToShare from "./components/ResultToShare";
-import FormContextProvider from "./contexts/FormsContext";
+import "./App.css";
 
 function App() {
   return (

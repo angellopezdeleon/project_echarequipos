@@ -1585,12 +1585,12 @@ const data = [
     {
         sport: "Deporte de raqueta",
         id: "317",
-        phrase: "o puedes medir tu éxito si nunca has fallado. – Steffi Graf",
+        phrase: "No puedes medir tu éxito si nunca has fallado. – Steffi Graf",
     },
     {
         sport: "Deporte de raqueta",
         id: "318",
-        phrase: "odría haber estado 5 años más en el Top Ten, habría ganado más torneos y seguro que algún Grand Slam más, pero perdí la motivación.  – Björn Borg",
+        phrase: "Podría haber estado 5 años más en el Top Ten, habría ganado más torneos y seguro que algún Grand Slam más, pero perdí la motivación.  – Björn Borg",
     },
     {
         sport: "Deporte de raqueta",
@@ -1721,17 +1721,3 @@ export default function getQuoteBySport(sport) {
         else reject(new Error("Categoría de deporte no encontrada"));
     });
 }
-
-// export function getSingleItem(idItem, sport) {
-//   return new Promise((resolve, reject) => {
-//     let itemFind = data.find((item) => {
-//       return item.id === Number(idItem);
-//     });
-//     setTimeout(() => {
-//       if (itemFind) resolve(itemFind);
-//       else reject(new Error("item no encontrado"));
-//     }, 1);
-//   });
-// }
-
-// [Math.floor(Math.random()*item.sport.length)]

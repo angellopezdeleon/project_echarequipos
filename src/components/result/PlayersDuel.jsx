@@ -1,6 +1,5 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import TeamCard from "./TeamCard";
-import { useState, useEffect } from "react";
 import { Grid } from "@mui/material";
 
 function PlayersDuel(props) {

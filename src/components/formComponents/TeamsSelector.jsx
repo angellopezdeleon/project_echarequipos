@@ -18,7 +18,6 @@ export default function TeamsSelector({children}) {
     <TextField
       name="teams"
       onChange={handleChange}
-      // onChange={children}
       fullWidth
       required
       id="outlined-required"
