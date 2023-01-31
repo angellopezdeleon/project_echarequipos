@@ -1,6 +1,5 @@
 import React, { useContext } from "react";
 import { Link } from "react-router-dom";
-import { formContext } from "../contexts/FormsContext";
 
 const h1Style = {
   margin: "50px",
@@ -16,10 +15,8 @@ const divStyle = {
 
 export default function Header() {
 
-  const { restartForm } = useContext(formContext);
   const handleLogoClick = () => {
     window.location.reload();
-    // restartForm();
   };
 
   return (
