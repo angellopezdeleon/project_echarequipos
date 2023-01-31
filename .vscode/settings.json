@@ -1,6 +1,7 @@
 {
-    "typescript.suppressAllWarnings": true,
+    "typescript.suppressAllWarnings": false,
     "typescript.suppressDiagnosticCodes": [
         "tslint:*"
     ],
+    "javascript.validate.enable": false
 }

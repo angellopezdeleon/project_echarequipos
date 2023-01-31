@@ -8,7 +8,7 @@ export default function FormContextProvider({ children }) {
   function addElement(element) {
     let newForm = Object.assign({}, form, element);
     setForm(newForm);
-    // console.log("form es:  ", form);
+    console.log("form es:  ", newForm);
 }
 
   function resrtartForm() {
