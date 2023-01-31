@@ -71,7 +71,11 @@ export default function PlayersSelector({ children }) {
     }
 
     const handlePasteFromButton = async (event) => {
+        
         const clipboardData = await navigator.clipboard.readText();
+        if (!clipboardData.trim()) {
+            return;
+        }
         const sortedText = sortNames(clipboardData);
         console.log("sortedText2: ", sortedText);
         setInputValue(sortedText);
@@ -81,11 +85,11 @@ export default function PlayersSelector({ children }) {
     };
 
     function createChips(event, newInputValue) {
-        console.log("llamada a createChips: ", newInputValue);
+        console.log("createChips: ", newInputValue);
         const options = newInputValue.split(SEPARATOR);
         options.pop();
 
-        if (options.length > 1) {
+        if (options.length > 0) {
             setValue(
                 value
                     .concat(options)
