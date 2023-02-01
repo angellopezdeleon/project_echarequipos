@@ -1,17 +1,15 @@
-import React, { useEffect, setError, setIsLoading, useState, useContext } from "react";
+import React, { useEffect, setIsLoading, useState, useContext } from "react";
 import { formContext } from "../contexts/FormsContext";
-import { useNavigate, useLocation } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import PlayersDuel from "./result/PlayersDuel";
 import getQuoteBySport from "../services/quotesAPI";
 import "./result/resultToShare.css";
 
 function ResultToShare() {
     const navigate = useNavigate();
-    const location = useLocation();
 
     const { form, restartForm } = useContext(formContext);
     let [data, setData] = useState({});
-    const [error, setError] = useState(false);
     const [isLoading, setIsLoading] = useState(true);
 
     useEffect(() => {
@@ -27,7 +25,6 @@ function ResultToShare() {
                 })
                 .catch((error) => {
                     console.error(error);
-                    setError(true);
                 });
         } else {
             setIsLoading(false);
@@ -36,7 +33,7 @@ function ResultToShare() {
 
     useEffect(() => {
         window.onbeforeunload = () => {
-            navigate("/");
+            navigate("/result");
             restartForm();
         };
     }, []);
