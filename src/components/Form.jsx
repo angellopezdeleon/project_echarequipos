@@ -9,9 +9,7 @@ import TimeSelector from "./formComponents/TimeSelector";
 import PlayersSelector from "./formComponents/PlayersSelector";
 import TeamsSelector from "./formComponents/TeamsSelector";
 
-
 export default function Form() {
-
   const { form } = useContext(formContext);
   const [required, setRequired] = useState({});
 

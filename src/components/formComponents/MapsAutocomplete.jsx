@@ -7,12 +7,11 @@ import Grid from "@mui/material/Grid";
 import Typography from "@mui/material/Typography";
 import parse from "autosuggest-highlight/parse";
 import throttle from "lodash/throttle";
-import { useState, useContext } from "react";
+import { useContext } from "react";
 import { formContext } from "../../contexts/FormsContext";
 
-// This key was created specifically for the demo in mui.com.
-// You need to create a new one for your application.
-const GOOGLE_MAPS_API_KEY = process.env.REACT_APP_G_MAPS;
+// This is a personal key, please use your own.
+const GOOGLE_MAPS_API_KEY = "AIzaSyAlcHVQ6Lhi4vgwEBrAd8lt5nRBsSO92ys";
 
 function loadScript(src, position, id) {
   if (!position) {
@@ -38,7 +37,7 @@ export default function GoogleMaps() {
   if (typeof window !== "undefined" && !loaded.current) {
     if (!document.querySelector("#google-maps")) {
       loadScript(
-        `https://maps.googleapis.com/maps/api/js?key=${GOOGLE_MAPS_API_KEY}&libraries=places`,
+        `https://maps.googleapis.com/maps/api/js?key=${GOOGLE_MAPS_API_KEY}&libraries=places&callback=Function.prototype`,
         document.querySelector("head"),
         "google-maps"
       );

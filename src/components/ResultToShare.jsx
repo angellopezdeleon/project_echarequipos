@@ -2,7 +2,7 @@ import React, { useEffect, setError, setIsLoading, useState, useContext } from "
 import { formContext } from "../contexts/FormsContext";
 import { useNavigate, useLocation } from "react-router-dom";
 import PlayersDuel from "./result/PlayersDuel";
-import getQuoteBySport from "./../services/quotesAPI";
+import getQuoteBySport from "../services/quotesAPI";
 import "./result/resultToShare.css";
 
 function ResultToShare() {
