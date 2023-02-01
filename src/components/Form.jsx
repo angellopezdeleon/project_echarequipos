@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext } from "react";
 import { Link } from "react-router-dom";
 import { Box, Grid, Button, FormControl } from "@mui/material";
 import { formContext } from "../contexts/FormsContext";
@@ -11,17 +11,16 @@ import TeamsSelector from "./formComponents/TeamsSelector";
 
 export default function Form() {
   const { form } = useContext(formContext);
-  const [required, setRequired] = useState({});
 
   return (
     <Box sx={{ flexGrow: 1 }}>
       <FormControl>
         <Grid container spacing={4}>
           <Grid item xs={12}>
-            <PlayersSelector></PlayersSelector>
+            <PlayersSelector />
           </Grid>
           <Grid item xs={12}>
-            <TeamsSelector></TeamsSelector>
+            <TeamsSelector />
           </Grid>
           <Grid item xs={6}>
             <TimeSelector />
