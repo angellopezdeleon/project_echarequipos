@@ -1,11 +1,10 @@
-import * as React from "react";
+import React, { useContext, useState } from "react";
 import Autocomplete from "@mui/material/Autocomplete";
 import IconButton from "@mui/material/IconButton";
 import TextField from "@mui/material/TextField";
 import { Box } from "@mui/system";
 import { Grid } from "@mui/material";
 import ContentPasteTwoToneIcon from "@mui/icons-material/ContentPasteTwoTone";
-import { useContext, useState } from "react";
 import { formContext } from "../../contexts/FormsContext";
 
 export default function PlayersSelector({ children }) {
