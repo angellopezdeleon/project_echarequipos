@@ -42,7 +42,7 @@ export default function Form() {
           <Grid item xs={12}>
             <SportSelector />
           </Grid>
-          {(required.players && required.teams !== undefined) ? (
+          {(form.teams > 1 && form.players.length >= form.teams) ? (
             <Grid item xs={12}>
               <Link to="/result">
                 <Button fullWidth variant="contained">

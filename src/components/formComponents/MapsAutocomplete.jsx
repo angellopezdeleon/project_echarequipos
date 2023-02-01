@@ -19,8 +19,6 @@ function loadScript(src, position, id) {
     return;
   }
 
-  console.log(GOOGLE_MAPS_API_KEY);
-
   const script = document.createElement("script");
   script.setAttribute("async", "");
   script.setAttribute("id", id);

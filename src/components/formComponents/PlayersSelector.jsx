@@ -18,7 +18,6 @@ export default function PlayersSelector({ children }) {
         let nameList = [];
         let names = "";
         const regex = /^[a-zA-ZÀ-ÿ\u00f1\u00d1]+$/;
-
         namesRaw.split("").forEach(function (c) {
             if (regex.test(c)) {
                 names += c;
@@ -27,7 +26,6 @@ export default function PlayersSelector({ children }) {
                 names = "";
             }
         });
-
         names && nameList.push(names);
         return nameList.join(SEPARATOR) + SEPARATOR;
     }
@@ -45,6 +43,7 @@ export default function PlayersSelector({ children }) {
         const lastOption = options[options.length - 1];
         setValue(value.concat(lastOption).filter((x) => x));
         setInputValue("");
+        console.log("onBLUR");
         handleChange();
     }
 
@@ -54,6 +53,14 @@ export default function PlayersSelector({ children }) {
             const lastOption = options[options.length - 1];
             setValue(value.concat(lastOption).filter((x) => x));
             setInputValue("");
+            console.log("ENTER");
+            handleChange();
+        } else if (event.key === "Tab") {
+            const options = inputValue.split(SEPARATOR);
+            const lastOption = options[options.length - 1];
+            setValue(value.concat(lastOption).filter((x) => x));
+            setInputValue("");
+            console.log("TAB");
             handleChange();
         }
     }
@@ -102,47 +109,45 @@ export default function PlayersSelector({ children }) {
     }
 
     return (
-        <Box sx={{ flexGrow: 1 }}>
-            <Grid container spacing={4}>
-                <Grid item xs={11}>
-                    <Autocomplete
-                        multiple
-                        autoSelect
-                        id="tags-filled"
-                        options={[]}
-                        value={value}
-                        inputValue={inputValue}
-                        popupIcon={""}
-                        onPaste={handlePaste}
-                        onChange={(event, newValue) => {
-                            setValue(newValue);
-                            handleChange();
-                        }}
-                        onBlur={() => handleBlur(inputValue)}
-                        onKeyDown={(event) => handleKeyDown(event, inputValue)}
-                        onInputChange={createChips}
-                        renderInput={(params) => (
-                            <TextField
-                                {...params}
-                                label="Participantes"
-                                fullWidth
-                                required
-                            />
-                        )}
-                    />
-                </Grid>
-                <Grid item xs={1}>
-                    <IconButton
-                        color="inherit"
-                        aria-label="paste players"
-                        size="large"
-                        variant="text"
-                        onClick={handlePasteFromButton}
-                    >
-                        <ContentPasteTwoToneIcon />
-                    </IconButton>
-                </Grid>
+        <Grid container spacing={1}>
+            <Grid item xs={1}>
+                <IconButton
+                    color="inherit"
+                    aria-label="paste players"
+                    size="large"
+                    variant="text"
+                    onClick={handlePasteFromButton}
+                >
+                    <ContentPasteTwoToneIcon />
+                </IconButton>
             </Grid>
-        </Box>
+            <Grid item xs={11}>
+                <Autocomplete
+                    multiple
+                    autoSelect
+                    id="tags-filled"
+                    options={[]}
+                    value={value}
+                    inputValue={inputValue}
+                    popupIcon={""}
+                    onPaste={handlePaste}
+                    onChange={(event, newValue) => {
+                        setValue(newValue);
+                        handleChange();
+                    }}
+                    onBlur={() => handleBlur(inputValue)}
+                    onKeyDown={(event) => handleKeyDown(event, inputValue)}
+                    onInputChange={createChips}
+                    renderInput={(params) => (
+                        <TextField
+                            {...params}
+                            label="Participantes"
+                            fullWidth
+                            required
+                        />
+                    )}
+                />
+            </Grid>
+        </Grid>
     );
 }

@@ -1,4 +1,4 @@
-import React, { useState, createContext } from "react";
+import React, { useState, createContext, useEffect } from "react";
 
 const formContext = createContext();
 
@@ -7,13 +7,18 @@ export default function FormContextProvider({ children }) {
 
   function addElement(element) {
     let newForm = Object.assign({}, form, element);
+    console.log("element es:  ", element);
     setForm(newForm);
-    console.log("form es:  ", newForm);
+    console.log("form es:  ", form);
 }
 
   function restartForm() {
     setForm({});
   }
+
+  useEffect(() => {
+    addElement();
+  }, []);
 
   return (
     <formContext.Provider
