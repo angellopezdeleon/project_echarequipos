@@ -7,7 +7,7 @@ import { Grid } from "@mui/material";
 import ContentPasteTwoToneIcon from "@mui/icons-material/ContentPasteTwoTone";
 import { formContext } from "../../contexts/FormsContext";
 
-export default function PlayersSelector({ children }) {
+export default function PlayersSelector() {
     const { addElement } = useContext(formContext);
     const [value, setValue] = useState([]);
     const [inputValue, setInputValue] = useState("");
@@ -34,7 +34,6 @@ export default function PlayersSelector({ children }) {
             players: value,
         };
         addElement(newUserData);
-        children();
     }
 
     function handleBlur(event) {

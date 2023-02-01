@@ -13,20 +13,15 @@ export default function Form() {
   const { form } = useContext(formContext);
   const [required, setRequired] = useState({});
 
-  function checkRequired() {
-    const newRequired = {...form};
-    setRequired(newRequired);
-  }
-
   return (
     <Box sx={{ flexGrow: 1 }}>
       <FormControl>
         <Grid container spacing={4}>
           <Grid item xs={12}>
-            <PlayersSelector>{checkRequired}</PlayersSelector>
+            <PlayersSelector></PlayersSelector>
           </Grid>
           <Grid item xs={12}>
-            <TeamsSelector>{checkRequired}</TeamsSelector>
+            <TeamsSelector></TeamsSelector>
           </Grid>
           <Grid item xs={6}>
             <TimeSelector />

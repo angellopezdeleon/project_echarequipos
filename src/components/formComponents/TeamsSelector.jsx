@@ -3,7 +3,7 @@ import TextField from "@mui/material/TextField";
 import { useContext } from "react";
 import { formContext } from "../../contexts/FormsContext";
 
-export default function TeamsSelector({children}) {
+export default function TeamsSelector() {
   const { addElement } = useContext(formContext);
 
   function handleChange(event) {
@@ -11,7 +11,6 @@ export default function TeamsSelector({children}) {
       teams: event.target.value,
     };
     addElement(newUserData);
-    children();
   }
 
   return (
