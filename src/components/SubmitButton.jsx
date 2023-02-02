@@ -3,6 +3,7 @@ import { Grid, Button } from "@mui/material";
 import { formContext } from "../contexts/FormsContext";
 import MainForm from "./MainForm";
 import ResultToShare from "./ResultToShare";
+import Tooltip from "@mui/material/Tooltip";
 
 export default function SubmitButton() {
     const [inputValue, setInputValue] = useState(true);
@@ -20,23 +21,44 @@ export default function SubmitButton() {
                 <div>
                     <MainForm />
                     <Grid sx={{ mt: 4 }}>
-                        {(dataForm.teams > 1 && dataForm.players && dataForm.players.length > dataForm.teams) ? (
+                        {dataForm.teams > 1 &&
+                        dataForm.players &&
+                        dataForm.players.length > dataForm.teams ? (
                             <Grid item xs={12}>
-                                <Button fullWidth size="large" variant="contained" onClick={handleSubmit}>
+                                <Button
+                                    fullWidth
+                                    size="large"
+                                    variant="contained"
+                                    onClick={handleSubmit}
+                                >
                                     Echar Equipos
                                 </Button>
                             </Grid>
                         ) : (
                             <Grid item xs={12}>
-                                <Button disabled size="large" fullWidth variant="contained">
-                                    FALTAN DATOS REQUERIDOS
-                                </Button>
-                            </Grid>)}
+                                <Tooltip
+                                    title="Es necesario elegir como mínimo 2 equipos y 3 jugadores"
+                                    placement="top"
+                                    arrow
+                                >
+                                    <span>
+                                        <Button
+                                            disabled
+                                            size="large"
+                                            fullWidth
+                                            variant="contained"
+                                        >
+                                            FALTAN DATOS REQUERIDOS
+                                        </Button>
+                                    </span>
+                                </Tooltip>
+                            </Grid>
+                        )}
                     </Grid>
                 </div>
             ) : (
                 <ResultToShare />
             )}
         </>
-    )};
-
+    );
+}

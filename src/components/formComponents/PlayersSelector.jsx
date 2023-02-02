@@ -3,8 +3,9 @@ import Autocomplete from "@mui/material/Autocomplete";
 import IconButton from "@mui/material/IconButton";
 import TextField from "@mui/material/TextField";
 import { Grid } from "@mui/material";
-import ContentPasteGoOutlinedIcon from '@mui/icons-material/ContentPasteGoOutlined';
+import ContentPasteGoOutlinedIcon from "@mui/icons-material/ContentPasteGoOutlined";
 import { formContext } from "../../contexts/FormsContext";
+import Tooltip from "@mui/material/Tooltip";
 
 export default function PlayersSelector() {
     const { addElement } = useContext(formContext);
@@ -115,17 +116,26 @@ export default function PlayersSelector() {
             container
             spacing={0}
             columns={{ xs: 12, sm: 12, md: 12 }}
-            style={{ display: "flex", alignItems: "center", textAlign: "center" }}
+            style={{
+                display: "flex",
+                alignItems: "center",
+                textAlign: "center",
+            }}
         >
             <Grid item xs={2} sm={1} md={1} sx={{ p: -1 }}>
-                <IconButton
-                    color="inherit"
-                    aria-label="paste players"
-                    variant="text"
-                    onClick={handlePasteFromButton}
-                >
-                    <ContentPasteGoOutlinedIcon fontSize="large" color="primary" />
-                </IconButton>
+                <Tooltip title="Pegado Inteligente" placement="top" arrow>
+                    <IconButton
+                        color="inherit"
+                        aria-label="paste players"
+                        variant="text"
+                        onClick={handlePasteFromButton}
+                    >
+                        <ContentPasteGoOutlinedIcon
+                            fontSize="large"
+                            color="primary"
+                        />
+                    </IconButton>
+                </Tooltip>
             </Grid>
             <Grid item xs={10} sm={11} md={11}>
                 <Autocomplete

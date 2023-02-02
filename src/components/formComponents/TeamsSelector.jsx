@@ -19,6 +19,7 @@ export default function TeamsSelector() {
       onChange={handleChange}
       fullWidth
       required
+      defaultValue="2"
       id="outlined-required"
       label="Nº equipos"
       type="number"
