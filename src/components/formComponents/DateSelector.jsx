@@ -60,7 +60,7 @@ export default function DateSelector() {
     >
       <Stack spacing={3}>
         <MobileDatePicker
-          label="Fecha de partido"
+          label="Fecha"
           inputFormat="DD/MM/YYYY"
           minDate={new Date(dayjs())}
           maxDate={new Date("2070-06-01")}

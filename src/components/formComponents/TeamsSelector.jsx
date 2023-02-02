@@ -20,7 +20,7 @@ export default function TeamsSelector() {
       fullWidth
       required
       id="outlined-required"
-      label="Numero de equipos"
+      label="Nº equipos"
       type="number"
       InputProps={{ inputProps: { min: 0 } }}
       InputLabelProps={{

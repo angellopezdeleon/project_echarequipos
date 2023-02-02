@@ -14,13 +14,13 @@ export default function MainForm() {
             <Grid item xs={12}>
                 <PlayersSelector />
             </Grid>
-            <Grid item xs={12}>
+            <Grid item xs={4}>
                 <TeamsSelector />
             </Grid>
-            <Grid item xs={6}>
+            <Grid item xs={4}>
                 <TimeSelector />
             </Grid>
-            <Grid item xs={6}>
+            <Grid item xs={4}>
                 <DateSelector />
             </Grid>
             <Grid item xs={12}>

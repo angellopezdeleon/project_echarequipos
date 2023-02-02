@@ -26,6 +26,10 @@ function ResultToShare() {
         } else {
             setIsLoading(false);
         }
+        console.log("DATA-------------->>>> ", data);
+        console.log("DATA.PHRASE------->>>> ", data.phrase);
+        console.log("DATAform.Sport------->>>> ", dataForm.sport);
+
     }, []);
 
     return (

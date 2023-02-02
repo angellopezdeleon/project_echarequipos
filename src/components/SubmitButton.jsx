@@ -19,16 +19,16 @@ export default function SubmitButton() {
             {inputValue ? (
                 <div>
                     <MainForm />
-                    <Grid sx={{ my: 2 }}>
-                        {(dataForm.teams > 1 && dataForm.players.length > dataForm.teams) ? (
+                    <Grid sx={{ mt: 4 }}>
+                        {(dataForm.teams > 1 && dataForm.players && dataForm.players.length > dataForm.teams) ? (
                             <Grid item xs={12}>
-                                <Button fullWidth variant="contained" onClick={handleSubmit}>
+                                <Button fullWidth size="large" variant="contained" onClick={handleSubmit}>
                                     Echar Equipos
                                 </Button>
                             </Grid>
                         ) : (
                             <Grid item xs={12}>
-                                <Button disabled fullWidth variant="contained">
+                                <Button disabled size="large" fullWidth variant="contained">
                                     FALTAN DATOS REQUERIDOS
                                 </Button>
                             </Grid>)}

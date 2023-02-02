@@ -19,6 +19,7 @@ export default function SportSelector() {
       fullWidth
       disablePortal
       freeSolo
+      includeInputInList
       id="combo-box-demo"
       options={sports}
       onInputChange={handleAccepted}

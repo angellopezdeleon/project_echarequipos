@@ -3,7 +3,7 @@ import Autocomplete from "@mui/material/Autocomplete";
 import IconButton from "@mui/material/IconButton";
 import TextField from "@mui/material/TextField";
 import { Grid } from "@mui/material";
-import ContentPasteTwoToneIcon from "@mui/icons-material/ContentPasteTwoTone";
+import ContentPasteGoOutlinedIcon from '@mui/icons-material/ContentPasteGoOutlined';
 import { formContext } from "../../contexts/FormsContext";
 
 export default function PlayersSelector() {
@@ -111,19 +111,23 @@ export default function PlayersSelector() {
     }, [inputValue]);
 
     return (
-        <Grid container spacing={1}>
-            <Grid item xs={1}>
+        <Grid
+            container
+            spacing={0}
+            columns={{ xs: 12, sm: 12, md: 12 }}
+            style={{ display: "flex", alignItems: "center", textAlign: "center" }}
+        >
+            <Grid item xs={2} sm={1} md={1} sx={{ p: -1 }}>
                 <IconButton
                     color="inherit"
                     aria-label="paste players"
-                    size="large"
                     variant="text"
                     onClick={handlePasteFromButton}
                 >
-                    <ContentPasteTwoToneIcon />
+                    <ContentPasteGoOutlinedIcon fontSize="large" color="primary" />
                 </IconButton>
             </Grid>
-            <Grid item xs={11}>
+            <Grid item xs={10} sm={11} md={11}>
                 <Autocomplete
                     multiple
                     autoSelect
