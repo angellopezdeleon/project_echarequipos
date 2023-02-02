@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useState, useEffect } from "react";
 import Autocomplete from "@mui/material/Autocomplete";
 import IconButton from "@mui/material/IconButton";
 import TextField from "@mui/material/TextField";
@@ -105,6 +105,11 @@ export default function PlayersSelector() {
         handleChange();
     }
 
+    useEffect(() => {
+        handleChange();
+        console.log("------->>>> USEEFFECT <<<<-------");
+    }, [inputValue]);
+
     return (
         <Grid container spacing={1}>
             <Grid item xs={1}>
@@ -128,7 +133,12 @@ export default function PlayersSelector() {
                     inputValue={inputValue}
                     popupIcon={""}
                     onPaste={handlePaste}
-                    onChange={(event, newValue) => {
+                    onChange={(e, newValue, situation, option) => {
+                        if (situation === "removeOption") {
+                            setInputValue(" ");
+                        } else if (situation === "clear") {
+                            setInputValue(" ");
+                        }
                         setValue(newValue);
                         handleChange();
                     }}
@@ -140,6 +150,7 @@ export default function PlayersSelector() {
                             {...params}
                             label="Participantes"
                             fullWidth
+                            onChange={handleChange}
                             required
                         />
                     )}

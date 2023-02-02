@@ -9,7 +9,7 @@ const h2Style = {
   
 };
 
-const divStyle = {
+const headerStyle = {
   backgroundColor: "#0d47a1",
   height: "150px",
 };
@@ -21,7 +21,7 @@ export default function Header() {
   };
 
   return (
-    <div style={divStyle}>
+    <div style={headerStyle}>
         <h2 style={h2Style} onClick={handleLogoClick}>
           Echar <br />
           Equipos

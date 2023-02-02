@@ -3,30 +3,24 @@ import React, { useState, createContext, useEffect } from "react";
 const formContext = createContext();
 
 export default function FormContextProvider({ children }) {
-  const [form, setForm] = useState({});
+  const [dataForm, setDataForm] = useState({});
 
   function addElement(element) {
-    let newForm = Object.assign({}, form, element);
-    console.log("element es:  ", element);
-    setForm(newForm);
-    console.log("form es:  ", form);
-}
-
-  function restartForm() {
-    setForm({});
+    let newDataForm = Object.assign({}, dataForm, element);
+    setDataForm(newDataForm);
   }
 
   useEffect(() => {
-    addElement();
-  }, []);
+    console.log("dataForm ha cambiado y es: ", dataForm);
+    // Aquí puedes hacer cualquier validación o procesamiento adicional
+  }, [dataForm]);
 
   return (
     <formContext.Provider
       className="Provider"
       value={{
-        form,
+        dataForm,
         addElement,
-        restartForm,
       }}
     >
       {children}

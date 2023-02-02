@@ -7,7 +7,7 @@ import TimeSelector from "./formComponents/TimeSelector";
 import PlayersSelector from "./formComponents/PlayersSelector";
 import TeamsSelector from "./formComponents/TeamsSelector";
 
-export default function Form() {
+export default function MainForm() {
 
     return (
         <Grid container spacing={4}>

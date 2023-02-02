@@ -1,12 +1,12 @@
 import React, { useState, useContext } from "react";
 import { Grid, Button } from "@mui/material";
 import { formContext } from "../contexts/FormsContext";
-import Form from "./Form";
+import MainForm from "./MainForm";
 import ResultToShare from "./ResultToShare";
 
 export default function SubmitButton() {
     const [inputValue, setInputValue] = useState(true);
-    const { form } = useContext(formContext);
+    const { dataForm } = useContext(formContext);
 
     const handleSubmit = (event) => {
         event.preventDefault();
@@ -18,9 +18,9 @@ export default function SubmitButton() {
         <>
             {inputValue ? (
                 <div>
-                    <Form />
+                    <MainForm />
                     <Grid sx={{ my: 2 }}>
-                        {(form.teams > 1 && form.players.length >= form.teams) ? (
+                        {(dataForm.teams > 1 && dataForm.players.length > dataForm.teams) ? (
                             <Grid item xs={12}>
                                 <Button fullWidth variant="contained" onClick={handleSubmit}>
                                     Echar Equipos
