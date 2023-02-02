@@ -18,6 +18,7 @@ export default function SportSelector() {
     <Autocomplete
       fullWidth
       disablePortal
+      freeSolo
       id="combo-box-demo"
       options={sports}
       onInputChange={handleAccepted}

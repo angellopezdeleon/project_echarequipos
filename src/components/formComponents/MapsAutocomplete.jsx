@@ -11,7 +11,7 @@ import { useContext } from "react";
 import { formContext } from "../../contexts/FormsContext";
 
 // This is a personal key, please use your own.
-const GOOGLE_MAPS_API_KEY = "AIzaSyAlcHVQ6Lhi4vgwEBrAd8lt5nRBsSO92ys";
+const GOOGLE_MAPS_API_KEY = "AIzaSyCFQDW_yw-lAKMxthLDbwozYvhg4iFdm6M";
 
 function loadScript(src, position, id) {
   if (!position) {
@@ -109,6 +109,7 @@ export default function GoogleMaps() {
       autoComplete
       includeInputInList
       filterSelectedOptions
+      freeSolo
       noOptionsText="No hay opciones"
       value={value}
       onChange={(event, newValue) => {

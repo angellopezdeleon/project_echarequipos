@@ -132,6 +132,7 @@ export default function PlayersSelector() {
                     value={value}
                     inputValue={inputValue}
                     popupIcon={""}
+                    noOptionsText="No hay opciones"
                     onPaste={handlePaste}
                     onChange={(e, newValue, situation, option) => {
                         if (situation === "removeOption") {
