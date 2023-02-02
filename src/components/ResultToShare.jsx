@@ -1,15 +1,12 @@
-import React, { useEffect, setIsLoading, useState, useContext } from "react";
+import React, { useEffect, useState, useContext } from "react";
 import { formContext } from "../contexts/FormsContext";
-import { useNavigate } from "react-router-dom";
 import PlayersDuel from "./result/PlayersDuel";
 import getQuoteBySport from "../services/quotesAPI";
 import "./result/resultToShare.css";
 
 function ResultToShare() {
-    const navigate = useNavigate();
-
-    const { form, restartForm } = useContext(formContext);
-    let [data, setData] = useState({});
+    const { form } = useContext(formContext);
+    const [data, setData] = useState({});
     const [isLoading, setIsLoading] = useState(true);
 
     useEffect(() => {
@@ -29,13 +26,6 @@ function ResultToShare() {
         } else {
             setIsLoading(false);
         }
-    }, []);
-
-    useEffect(() => {
-        window.onbeforeunload = () => {
-            navigate("/result");
-            restartForm();
-        };
     }, []);
 
     return (

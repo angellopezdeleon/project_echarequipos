@@ -1,7 +1,5 @@
-import React, { useContext } from "react";
-import { Link } from "react-router-dom";
-import { Box, Grid, Button, FormControl } from "@mui/material";
-import { formContext } from "../contexts/FormsContext";
+import React from "react";
+import { Grid } from "@mui/material";
 import SportSelector from "./formComponents/SportSelector";
 import GoogleMaps from "./formComponents/MapsAutocomplete";
 import DateSelector from "./formComponents/DateSelector";
@@ -10,49 +8,27 @@ import PlayersSelector from "./formComponents/PlayersSelector";
 import TeamsSelector from "./formComponents/TeamsSelector";
 
 export default function Form() {
-  const { form } = useContext(formContext);
 
-  return (
-    <Box sx={{ flexGrow: 1 }}>
-      <FormControl>
+    return (
         <Grid container spacing={4}>
-          <Grid item xs={12}>
-            <PlayersSelector />
-          </Grid>
-          <Grid item xs={12}>
-            <TeamsSelector />
-          </Grid>
-          <Grid item xs={6}>
-            <TimeSelector />
-          </Grid>
-          <Grid item xs={6}>
-            <DateSelector />
-          </Grid>
-          <Grid item xs={12}>
-            <GoogleMaps />
-          </Grid>
-          <Grid item xs={12}>
-            <SportSelector />
-          </Grid>
-          {(form.teams > 1 && form.players.length >= form.teams) ? (
             <Grid item xs={12}>
-              <Link to="/result">
-                <Button fullWidth variant="contained">
-                  Echar Equipos
-                </Button>
-              </Link>
+                <PlayersSelector />
             </Grid>
-          ) : (
             <Grid item xs={12}>
-              <Link to="/">
-                <Button disabled fullWidth variant="contained">
-                  FALTAN DATOS REQUERIDOS
-                </Button>
-              </Link>
+                <TeamsSelector />
             </Grid>
-          )}
+            <Grid item xs={6}>
+                <TimeSelector />
+            </Grid>
+            <Grid item xs={6}>
+                <DateSelector />
+            </Grid>
+            <Grid item xs={12}>
+                <GoogleMaps />
+            </Grid>
+            <Grid item xs={12}>
+                <SportSelector />
+            </Grid>
         </Grid>
-      </FormControl>
-    </Box>
-  );
-}
+    )
+};
