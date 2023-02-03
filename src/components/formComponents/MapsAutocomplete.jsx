@@ -10,7 +10,7 @@ import throttle from "lodash/throttle";
 import { useContext } from "react";
 import { formContext } from "../../contexts/FormsContext";
 
-// This is a personal key, please use your own.
+// This is a personal key and it is securized, please use your own.
 const GOOGLE_MAPS_API_KEY = "AIzaSyCFQDW_yw-lAKMxthLDbwozYvhg4iFdm6M";
 
 function loadScript(src, position, id) {
@@ -58,13 +58,8 @@ export default function GoogleMaps() {
     let active = true;
 
     if (!autocompleteService.current && window.google) {
-      autocompleteService.current =
-        new window.google.maps.places.AutocompleteService();
-    }
-    if (!autocompleteService.current) {
-      return undefined;
-    }
-
+      autocompleteService.current = new window.google.maps.places.AutocompleteService();}
+    if (!autocompleteService.current) {return undefined;}
     if (inputValue === "") {
       setOptions(value ? [value] : []);
       return undefined;
@@ -73,15 +68,8 @@ export default function GoogleMaps() {
     fetch({ input: inputValue }, (results) => {
       if (active) {
         let newOptions = [];
-
-        if (value) {
-          newOptions = [value];
-        }
-
-        if (results) {
-          newOptions = [...newOptions, ...results];
-        }
-
+        if (value) {newOptions = [value];}
+        if (results) {newOptions = [...newOptions, ...results];}
         setOptions(newOptions);
       }
     });
