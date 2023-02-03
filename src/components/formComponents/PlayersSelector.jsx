@@ -12,6 +12,7 @@ export default function PlayersSelector() {
     const [value, setValue] = useState([]);
     const [inputValue, setInputValue] = useState("");
     const SEPARATOR = "\u0003";
+    const [options, setOptions] = useState([]);
 
     function sortNames(namesRaw) {
         let nameList = [];
@@ -106,10 +107,23 @@ export default function PlayersSelector() {
         handleChange();
     }
 
+    const handleUpdate = () => {
+        setInputValue(" ");
+        setTimeout(() => {
+            setInputValue("");
+        }, 200);
+    };
+
     useEffect(() => {
         handleChange();
         console.log("------->>>> USEEFFECT <<<<-------");
     }, [inputValue]);
+
+    useEffect(() => {
+        const storedData = localStorage.getItem("shuffledPlayers");
+        const shuffledPlayers = storedData ? JSON.parse(storedData) : [];
+        setOptions(shuffledPlayers);
+    }, []);
 
     return (
         <Grid
@@ -123,7 +137,7 @@ export default function PlayersSelector() {
             }}
         >
             <Grid item xs={2} sm={1} md={1} sx={{ p: -1 }}>
-                <Tooltip title="Pegado Inteligente" placement="top" arrow>
+                <Tooltip title="Pegar Jugadores" placement="top" arrow>
                     <IconButton
                         color="inherit"
                         aria-label="paste players"
@@ -141,18 +155,21 @@ export default function PlayersSelector() {
                 <Autocomplete
                     multiple
                     autoSelect
+                    freeSolo
                     id="tags-filled"
-                    options={[]}
+                    options={options}
                     value={value}
                     inputValue={inputValue}
                     popupIcon={""}
                     noOptionsText="No hay opciones"
                     onPaste={handlePaste}
                     onChange={(e, newValue, situation, option) => {
-                        if (situation === "removeOption") {
-                            setInputValue(" ");
-                        } else if (situation === "clear") {
-                            setInputValue(" ");
+                        if (
+                            situation === "removeOption" ||
+                            situation === "selectOption" ||
+                            situation === "clear"
+                        ) {
+                            handleUpdate();
                         }
                         setValue(newValue);
                         handleChange();

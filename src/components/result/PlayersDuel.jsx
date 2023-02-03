@@ -18,6 +18,7 @@ function PlayersDuel(props) {
                     namesRaw[currentIndex],
                 ];
             }
+            localStorage.setItem("shuffledPlayers", JSON.stringify(namesRaw));
             return namesRaw;
         }
 

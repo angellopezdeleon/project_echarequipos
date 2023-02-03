@@ -20,7 +20,7 @@ export default function SubmitButton() {
             {inputValue ? (
                 <div>
                     <MainForm />
-                    <Grid sx={{ mt: 4 }}>
+                    <Grid sx={{ mt: 3 }}>
                         {dataForm.teams > 1 &&
                         dataForm.players &&
                         dataForm.players.length > dataForm.teams ? (

@@ -1,11 +1,13 @@
-import * as React from "react";
+import React, { useState, useContext }  from "react";
 import TextField from "@mui/material/TextField";
 import Autocomplete from "@mui/material/Autocomplete";
-import { useState, useContext } from "react";
 import { formContext } from "../../contexts/FormsContext";
 
 export default function SportSelector() {
   const { addElement } = useContext(formContext);
+  const [value, setValue] = useState(null);
+  const [inputValue, setInputValue] = useState("");
+  const [options, setOptions] = useState(["Fútbol", "Baloncesto", "Deporte de raqueta"]);
 
   function handleAccepted(event) {
     let newUserData = {
@@ -19,10 +21,19 @@ export default function SportSelector() {
       fullWidth
       disablePortal
       freeSolo
+      options={options}
       includeInputInList
       id="combo-box-demo"
       options={sports}
       onInputChange={handleAccepted}
+      onChange={(event, newValue) => {
+        setOptions(newValue ? [newValue, ...options] : options);
+        setValue(newValue);
+      }}
+      onInputChange={(event, newInputValue) => {
+        setInputValue(newInputValue);
+        handleAccepted(newInputValue);
+      }}
       renderInput={(params) => <TextField {...params} label="Deporte" />}
     />
   );
