@@ -23,7 +23,7 @@ export default function TeamsSelector() {
       id="outlined-required"
       label="Nº equipos"
       type="number"
-      InputProps={{ inputProps: { min: 0 } }}
+      InputProps={{ inputProps: { min: 2 } }}
       InputLabelProps={{
         shrink: true,
       }}
