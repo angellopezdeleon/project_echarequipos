@@ -27,7 +27,7 @@
 <!-- ABOUT THE PROJECT -->
 ## Sobre el proyecto
 
-La idea es tratar de mejorar a nivel usabilidad las aplicaciónes que existen en el mercado para realizar un sorteo de equipos.
+La idea es tratar de mejorar a nivel usabilidad las aplicaciones que existen en el mercado para realizar un sorteo de equipos.
 Por otro lado, me ha valido para crear una aplicación con React usando un sistema de diseño Material Design con la librería Material UI.
 
 <div align="center" >
