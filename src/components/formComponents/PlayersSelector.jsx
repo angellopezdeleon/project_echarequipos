@@ -91,13 +91,13 @@ export default function PlayersSelector() {
 
     function createChips(event, newInputValue) {
         console.log("createChips: ", newInputValue);
-        const options = newInputValue.split(SEPARATOR);
-        options.pop();
+        const chips = newInputValue.split(SEPARATOR);
+        chips.pop();
 
-        if (options.length > 0) {
+        if (chips.length > 0) {
             setValue(
                 value
-                    .concat(options)
+                    .concat(chips)
                     .map((x) => x.trim())
                     .filter((x) => x)
             );
@@ -105,6 +105,7 @@ export default function PlayersSelector() {
             setInputValue(newInputValue);
         }
         handleChange();
+        // setInputValue("");
     }
 
     const handleUpdate = () => {
@@ -123,6 +124,7 @@ export default function PlayersSelector() {
         const storedData = localStorage.getItem("shuffledPlayers");
         const shuffledPlayers = storedData ? JSON.parse(storedData) : [];
         setOptions(shuffledPlayers);
+        console.log("------->>>> USEEFFECT localStorage <<<<-------");
     }, []);
 
     return (
