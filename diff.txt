@@ -1,0 +1,449 @@
+diff --git a/src/components/Header.jsx b/src/components/Header.jsx
+index 537dfa1..7977e90 100644
+--- a/src/components/Header.jsx
++++ b/src/components/Header.jsx
+@@ -1,19 +1,33 @@
+ import React from "react";
+ 
+ const h2Style = {
+-  margin: "70px auto 20px auto",
+-  width: "100px",
++  margin: "40px auto 20px auto",
++  width: "75px",
+   maxWidth: "100%",
+   color: "white",
+   cursor: "pointer",
+-  
++  fontSize: "20px",
++  display: "flex",
++  flexDirection: "column",
+ };
+ 
+-const divStyle = {
++const headerStyle = {
+   backgroundColor: "#0d47a1",
+   height: "150px",
+ };
+ 
++const spanStyle = {
++  fontSize: "17px",
++  padding: "0 0 15px 0",
++  alginItems: "center",
++};
++
++const h2 = {
++  fontSize: "24px",
++  padding: "0 0 15px 0",
++  margin: "-5px",
++};
++
+ export default function Header() {
+ 
+   const handleLogoClick = () => {
+@@ -21,11 +35,12 @@ export default function Header() {
+   };
+ 
+   return (
+-    <div style={divStyle}>
+-        <h2 style={h2Style} onClick={handleLogoClick}>
+-          Echar <br />
+-          Equipos
+-        </h2>
++    <div style={headerStyle}>
++        <div style={h2Style} onClick={handleLogoClick}>
++          <h2 style={h2}>Echar</h2>
++          <h2 style={h2}>Equipos</h2>
++          <h2 style={h2}><span style={spanStyle}>⚽</span> com</h2>
++        </div>
+     </div>
+   );
+ }
+diff --git a/src/components/Form.jsx b/src/components/MainForm.jsx
+similarity index 87%
+rename from src/components/Form.jsx
+rename to src/components/MainForm.jsx
+index 1d9ff83..4e58b55 100644
+--- a/src/components/Form.jsx
++++ b/src/components/MainForm.jsx
+@@ -7,20 +7,20 @@ import TimeSelector from "./formComponents/TimeSelector";
+ import PlayersSelector from "./formComponents/PlayersSelector";
+ import TeamsSelector from "./formComponents/TeamsSelector";
+ 
+-export default function Form() {
++export default function MainForm() {
+ 
+     return (
+         <Grid container spacing={4}>
+             <Grid item xs={12}>
+                 <PlayersSelector />
+             </Grid>
+-            <Grid item xs={12}>
++            <Grid item xs={4}>
+                 <TeamsSelector />
+             </Grid>
+-            <Grid item xs={6}>
++            <Grid item xs={4}>
+                 <TimeSelector />
+             </Grid>
+-            <Grid item xs={6}>
++            <Grid item xs={4}>
+                 <DateSelector />
+             </Grid>
+             <Grid item xs={12}>
+diff --git a/src/components/ResultToShare.jsx b/src/components/ResultToShare.jsx
+index 57cdcc0..76660e9 100644
+--- a/src/components/ResultToShare.jsx
++++ b/src/components/ResultToShare.jsx
+@@ -5,13 +5,13 @@ import getQuoteBySport from "../services/quotesAPI";
+ import "./result/resultToShare.css";
+ 
+ function ResultToShare() {
+-    const { form } = useContext(formContext);
++    const { dataForm } = useContext(formContext);
+     const [data, setData] = useState({});
+     const [isLoading, setIsLoading] = useState(true);
+ 
+     useEffect(() => {
+-        if (form.sport) {
+-            getQuoteBySport(form.sport)
++        if (dataForm.sport) {
++            getQuoteBySport(dataForm.sport)
+                 .then((respuestaDatos) => {
+                     setData(
+                         respuestaDatos[
+@@ -26,20 +26,24 @@ function ResultToShare() {
+         } else {
+             setIsLoading(false);
+         }
++        console.log("DATA-------------->>>> ", data);
++        console.log("DATA.PHRASE------->>>> ", data.phrase);
++        console.log("DATAform.Sport------->>>> ", dataForm.sport);
++
+     }, []);
+ 
+     return (
+         <div className="containResults">
+-            {form.day ? <h1>Convocatoria para {form.day}</h1> : null}
++            {dataForm.day ? <h1>Convocatoria para {dataForm.day}</h1> : null}
+             {isLoading ? (
+                 <p>Cargando...</p>
+             ) : (
+                 <>
+-                    <PlayersDuel props={form} />
+-                    {form.time ? <p>A las {form.time}</p> : null}
+-                    {form.sport ? <p>Para jugar al {form.sport}</p> : null}
+-                    {form.sport ? <p>{data.phrase}</p> : null}
+-                    {form.address ? <p>En {form.address}</p> : null}
++                    <PlayersDuel props={dataForm} />
++                    {dataForm.time ? <p>A las {dataForm.time}</p> : null}
++                    {dataForm.sport ? <p>Para jugar al {dataForm.sport}</p> : null}
++                    {dataForm.sport ? <p>{data.phrase}</p> : null}
++                    {dataForm.address ? <p>En {dataForm.address}</p> : null}
+                 </>
+             )}
+         </div>
+diff --git a/src/components/SubmitButton.jsx b/src/components/SubmitButton.jsx
+index 7524fdd..41ec848 100644
+--- a/src/components/SubmitButton.jsx
++++ b/src/components/SubmitButton.jsx
+@@ -1,12 +1,13 @@
+ import React, { useState, useContext } from "react";
+ import { Grid, Button } from "@mui/material";
+ import { formContext } from "../contexts/FormsContext";
+-import Form from "./Form";
++import MainForm from "./MainForm";
+ import ResultToShare from "./ResultToShare";
++import Tooltip from "@mui/material/Tooltip";
+ 
+ export default function SubmitButton() {
+     const [inputValue, setInputValue] = useState(true);
+-    const { form } = useContext(formContext);
++    const { dataForm } = useContext(formContext);
+ 
+     const handleSubmit = (event) => {
+         event.preventDefault();
+@@ -18,25 +19,46 @@ export default function SubmitButton() {
+         <>
+             {inputValue ? (
+                 <div>
+-                    <Form />
+-                    <Grid sx={{ my: 2 }}>
+-                        {(form.teams > 1 && form.players.length >= form.teams) ? (
++                    <MainForm />
++                    <Grid sx={{ mt: 4 }}>
++                        {dataForm.teams > 1 &&
++                        dataForm.players &&
++                        dataForm.players.length > dataForm.teams ? (
+                             <Grid item xs={12}>
+-                                <Button fullWidth variant="contained" onClick={handleSubmit}>
++                                <Button
++                                    fullWidth
++                                    size="large"
++                                    variant="contained"
++                                    onClick={handleSubmit}
++                                >
+                                     Echar Equipos
+                                 </Button>
+                             </Grid>
+                         ) : (
+                             <Grid item xs={12}>
+-                                <Button disabled fullWidth variant="contained">
+-                                    FALTAN DATOS REQUERIDOS
+-                                </Button>
+-                            </Grid>)}
++                                <Tooltip
++                                    title="Es necesario elegir como mínimo 2 equipos y 3 jugadores"
++                                    placement="top"
++                                    arrow
++                                >
++                                    <span>
++                                        <Button
++                                            disabled
++                                            size="large"
++                                            fullWidth
++                                            variant="contained"
++                                        >
++                                            FALTAN DATOS REQUERIDOS
++                                        </Button>
++                                    </span>
++                                </Tooltip>
++                            </Grid>
++                        )}
+                     </Grid>
+                 </div>
+             ) : (
+                 <ResultToShare />
+             )}
+         </>
+-    )};
+-
++    );
++}
+diff --git a/src/components/formComponents/DateSelector.jsx b/src/components/formComponents/DateSelector.jsx
+index 159e6fb..5d3bb5a 100644
+--- a/src/components/formComponents/DateSelector.jsx
++++ b/src/components/formComponents/DateSelector.jsx
+@@ -60,7 +60,7 @@ export default function DateSelector() {
+     >
+       <Stack spacing={3}>
+         <MobileDatePicker
+-          label="Fecha de partido"
++          label="Fecha"
+           inputFormat="DD/MM/YYYY"
+           minDate={new Date(dayjs())}
+           maxDate={new Date("2070-06-01")}
+diff --git a/src/components/formComponents/MapsAutocomplete.jsx b/src/components/formComponents/MapsAutocomplete.jsx
+index 1bf3a9b..97cc9f4 100644
+--- a/src/components/formComponents/MapsAutocomplete.jsx
++++ b/src/components/formComponents/MapsAutocomplete.jsx
+@@ -11,7 +11,7 @@ import { useContext } from "react";
+ import { formContext } from "../../contexts/FormsContext";
+ 
+ // This is a personal key, please use your own.
+-const GOOGLE_MAPS_API_KEY = "AIzaSyAlcHVQ6Lhi4vgwEBrAd8lt5nRBsSO92ys";
++const GOOGLE_MAPS_API_KEY = "AIzaSyCFQDW_yw-lAKMxthLDbwozYvhg4iFdm6M";
+ 
+ function loadScript(src, position, id) {
+   if (!position) {
+@@ -109,6 +109,7 @@ export default function GoogleMaps() {
+       autoComplete
+       includeInputInList
+       filterSelectedOptions
++      freeSolo
+       noOptionsText="No hay opciones"
+       value={value}
+       onChange={(event, newValue) => {
+diff --git a/src/components/formComponents/PlayersSelector.jsx b/src/components/formComponents/PlayersSelector.jsx
+index bc9ce87..f72a46d 100644
+--- a/src/components/formComponents/PlayersSelector.jsx
++++ b/src/components/formComponents/PlayersSelector.jsx
+@@ -1,10 +1,11 @@
+-import React, { useContext, useState } from "react";
++import React, { useContext, useState, useEffect } from "react";
+ import Autocomplete from "@mui/material/Autocomplete";
+ import IconButton from "@mui/material/IconButton";
+ import TextField from "@mui/material/TextField";
+ import { Grid } from "@mui/material";
+-import ContentPasteTwoToneIcon from "@mui/icons-material/ContentPasteTwoTone";
++import ContentPasteGoOutlinedIcon from "@mui/icons-material/ContentPasteGoOutlined";
+ import { formContext } from "../../contexts/FormsContext";
++import Tooltip from "@mui/material/Tooltip";
+ 
+ export default function PlayersSelector() {
+     const { addElement } = useContext(formContext);
+@@ -105,20 +106,38 @@ export default function PlayersSelector() {
+         handleChange();
+     }
+ 
++    useEffect(() => {
++        handleChange();
++        console.log("------->>>> USEEFFECT <<<<-------");
++    }, [inputValue]);
++
+     return (
+-        <Grid container spacing={1}>
+-            <Grid item xs={1}>
+-                <IconButton
+-                    color="inherit"
+-                    aria-label="paste players"
+-                    size="large"
+-                    variant="text"
+-                    onClick={handlePasteFromButton}
+-                >
+-                    <ContentPasteTwoToneIcon />
+-                </IconButton>
++        <Grid
++            container
++            spacing={0}
++            columns={{ xs: 12, sm: 12, md: 12 }}
++            style={{
++                display: "flex",
++                alignItems: "center",
++                textAlign: "center",
++            }}
++        >
++            <Grid item xs={2} sm={1} md={1} sx={{ p: -1 }}>
++                <Tooltip title="Pegado Inteligente" placement="top" arrow>
++                    <IconButton
++                        color="inherit"
++                        aria-label="paste players"
++                        variant="text"
++                        onClick={handlePasteFromButton}
++                    >
++                        <ContentPasteGoOutlinedIcon
++                            fontSize="large"
++                            color="primary"
++                        />
++                    </IconButton>
++                </Tooltip>
+             </Grid>
+-            <Grid item xs={11}>
++            <Grid item xs={10} sm={11} md={11}>
+                 <Autocomplete
+                     multiple
+                     autoSelect
+@@ -127,8 +146,14 @@ export default function PlayersSelector() {
+                     value={value}
+                     inputValue={inputValue}
+                     popupIcon={""}
++                    noOptionsText="No hay opciones"
+                     onPaste={handlePaste}
+-                    onChange={(event, newValue) => {
++                    onChange={(e, newValue, situation, option) => {
++                        if (situation === "removeOption") {
++                            setInputValue(" ");
++                        } else if (situation === "clear") {
++                            setInputValue(" ");
++                        }
+                         setValue(newValue);
+                         handleChange();
+                     }}
+@@ -140,6 +165,7 @@ export default function PlayersSelector() {
+                             {...params}
+                             label="Participantes"
+                             fullWidth
++                            onChange={handleChange}
+                             required
+                         />
+                     )}
+diff --git a/src/components/formComponents/SportSelector.jsx b/src/components/formComponents/SportSelector.jsx
+index 7b00ca1..7fadedf 100644
+--- a/src/components/formComponents/SportSelector.jsx
++++ b/src/components/formComponents/SportSelector.jsx
+@@ -18,6 +18,8 @@ export default function SportSelector() {
+     <Autocomplete
+       fullWidth
+       disablePortal
++      freeSolo
++      includeInputInList
+       id="combo-box-demo"
+       options={sports}
+       onInputChange={handleAccepted}
+diff --git a/src/components/formComponents/TeamsSelector.jsx b/src/components/formComponents/TeamsSelector.jsx
+index 3cc8b91..85b2ea6 100644
+--- a/src/components/formComponents/TeamsSelector.jsx
++++ b/src/components/formComponents/TeamsSelector.jsx
+@@ -19,8 +19,9 @@ export default function TeamsSelector() {
+       onChange={handleChange}
+       fullWidth
+       required
++      defaultValue="2"
+       id="outlined-required"
+-      label="Numero de equipos"
++      label="Nº equipos"
+       type="number"
+       InputProps={{ inputProps: { min: 0 } }}
+       InputLabelProps={{
+diff --git a/src/contexts/FormsContext.jsx b/src/contexts/FormsContext.jsx
+index a3053e5..5e15de5 100644
+--- a/src/contexts/FormsContext.jsx
++++ b/src/contexts/FormsContext.jsx
+@@ -3,30 +3,24 @@ import React, { useState, createContext, useEffect } from "react";
+ const formContext = createContext();
+ 
+ export default function FormContextProvider({ children }) {
+-  const [form, setForm] = useState({});
++  const [dataForm, setDataForm] = useState({teams: '2'});
+ 
+   function addElement(element) {
+-    let newForm = Object.assign({}, form, element);
+-    console.log("element es:  ", element);
+-    setForm(newForm);
+-    console.log("form es:  ", form);
+-}
+-
+-  function restartForm() {
+-    setForm({});
++    let newDataForm = Object.assign({teams: '2'}, dataForm, element);
++    setDataForm(newDataForm);
+   }
+ 
+   useEffect(() => {
+-    addElement();
+-  }, []);
++    console.log("dataForm ha cambiado y es: ", dataForm);
++
++  }, [dataForm]);
+ 
+   return (
+     <formContext.Provider
+       className="Provider"
+       value={{
+-        form,
++        dataForm,
+         addElement,
+-        restartForm,
+       }}
+     >
+       {children}
+diff --git a/src/index.css b/src/index.css
+index 902d609..0be0991 100644
+--- a/src/index.css
++++ b/src/index.css
+@@ -6,9 +6,10 @@ body {
+   -webkit-font-smoothing: antialiased;
+   -moz-osx-font-smoothing: grayscale;
+   background-color: #0d47a1;
++  min-width: 342px;
+ }
+ 
+ code {
+   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+     monospace;
+-}
++}
+\ No newline at end of file
+diff --git a/src/index.js b/src/index.js
+index 2cb1087..04c4cc4 100644
+--- a/src/index.js
++++ b/src/index.js
+@@ -5,7 +5,7 @@ import App from './App';
+ 
+ const root = ReactDOM.createRoot(document.getElementById('root'));
+ root.render(
+-  <React.StrictMode>
++  // <React.StrictMode>
+     <App />
+-  </React.StrictMode>
++  // </React.StrictMode>
+ );
