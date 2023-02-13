@@ -11,8 +11,6 @@ export default function SportSelector() {
         let newUserData = {
             sport: event.target.innerText || event.target.value,
         };
-        console.log("event.target.innerText: ", event.target.innerText);
-        console.log("event.target.value: ", event.target.value);
         addElement(newUserData);
     }
 

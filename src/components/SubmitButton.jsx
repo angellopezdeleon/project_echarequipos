@@ -10,7 +10,7 @@ export default function SubmitButton() {
     const [inputValue, setInputValue] = useState(true);
     const { dataForm } = useContext(formContext);
     const [isValid, setIsValid] = useState(false);
-    const [repeatedPlayers, setRepeatedPlayers] = useState(false);
+    const [repeatedPlayers, setRepeatedPlayers] = useState([]);
 
     // Función para manejar el evento de submit
     const handleSubmit = (event) => {
@@ -18,6 +18,24 @@ export default function SubmitButton() {
         setInputValue(false);
         console.log("Form submitted: ", inputValue);
     };
+
+    // Función para mostrar los jugadores repetidos
+    const handleRepeatedPlayers = repeatedPlayers.reduce((players, player) => {
+        if (!players.includes(player)) {
+            players.push(player.charAt(0).toUpperCase() + player.slice(1));
+        }
+        return players;
+    }, []);
+
+    const formattedPlayers = handleRepeatedPlayers.reduce(
+        (formattedPlayers, player, index) => {
+            if (index === handleRepeatedPlayers.length - 1) {
+                return formattedPlayers + player + ".";
+            }
+            return formattedPlayers + player + ", ";
+        },
+        ""
+    );
 
     // Un useEffect para evaluar si el formulario es válido
     useEffect(() => {
@@ -28,24 +46,19 @@ export default function SubmitButton() {
                 dataForm.players.every(
                     (player, index, self) => self.indexOf(player) === index
                 ) &&
-                !repeatedPlayers
+                repeatedPlayers.length === 0
         );
-    }, [dataForm.players, dataForm.teams]);
+    }, [dataForm.players, dataForm.teams, repeatedPlayers]);
 
     // Un useEffect para evaluar si en el dataForm hay jugadores repetidos
     useEffect(() => {
         if (dataForm.players) {
-            const players = dataForm.players.map((player) =>
-                player.toLowerCase()
-            );
+            const players = dataForm.players.map((player) => player.toLowerCase());
             const duplicatedPlayers = players.filter(
                 (player, index) => players.indexOf(player) !== index
             );
-            if (duplicatedPlayers.length > 0) {
-                setRepeatedPlayers(true);
-            } else {
-                setRepeatedPlayers(false);
-            }
+            setRepeatedPlayers(duplicatedPlayers);
+            console.log("repeatedPlayers: ", repeatedPlayers);
         }
     }, [dataForm]);
 
@@ -76,18 +89,12 @@ export default function SubmitButton() {
                                 >
                                     FALTAN DATOS REQUERIDOS
                                 </Button>
-                                {repeatedPlayers ? (
-                                    <FormHelperText
-                                        id="component-helper-text"
-                                        error
-                                    >
-                                        * Hay jugadores repetidos
+                                {repeatedPlayers.length > 0 ? (
+                                    <FormHelperText id="component-helper-text" error>
+                                        * Hay jugadores repetidos: {formattedPlayers}
                                     </FormHelperText>
                                 ) : (
-                                    <FormHelperText
-                                        id="component-helper-text"
-                                        error
-                                    >
+                                    <FormHelperText id="component-helper-text" error>
                                         * Faltan jugadores o equipos
                                     </FormHelperText>
                                 )}

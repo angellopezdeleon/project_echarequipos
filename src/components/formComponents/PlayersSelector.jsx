@@ -15,6 +15,7 @@ export default function PlayersSelector() {
 
     // Organiza los nombres de los jugadores
     function sortNames(namesRaw) {
+        // const regex = /[^a-zA-ZÀ-ÿ\u00f1\u00d1\s]+/; VERSION permitiendo ESPACIOS pero también saltos de línea
         const regex = /[^a-zA-ZÀ-ÿ\u00f1\u00d1]+/;
         const nameList = namesRaw.split(regex);
         return nameList.join(SEPARATOR) + SEPARATOR;
@@ -59,7 +60,9 @@ export default function PlayersSelector() {
                 setInputValue(sortedText);
                 createChips(event, sortedText);
                 handleChange();
-                setInputValue("");
+                setTimeout(() => {
+                    setInputValue("");
+                }, 1);
             });
         } else if (type === "paste") {
             const text = event.clipboardData.getData("text");
