@@ -1,15 +1,23 @@
-import * as React from "react";
+import React, { useState } from "react";
 import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
 import Typography from "@mui/material/Typography";
 import Popover from "@mui/material/Popover";
 import IconButton from "@mui/material/IconButton";
 
-const colors = ["#000000", "#ffffff", "#7b9fe2", "#e84a33", "#fee65f", "#9be674", "#f078ea"];
+const colors = [
+    "#000000",
+    "#ffffff",
+    "#7b9fe2",
+    "#e84a33",
+    "#fee65f",
+    "#9be674",
+    "#f078ea",
+];
 
 export default function TeamCard(props) {
-    const [selectedColor, setSelectedColor] = React.useState(colors[0]);
-    const [anchorEl, setAnchorEl] = React.useState(null);
+    const [selectedColor, setSelectedColor] = useState(colors[0]);
+    const [anchorEl, setAnchorEl] = useState(null);
 
     let { id, team } = props;
 
@@ -23,12 +31,12 @@ export default function TeamCard(props) {
         clipPath: "circle(50%)",
     };
 
-    const handleClick = (event) => {
-        setAnchorEl(event.currentTarget);
-    };
-
     const handleClose = () => {
         setAnchorEl(null);
+    };
+
+    const handleClick = (event) => {
+        setAnchorEl(event.currentTarget);
     };
 
     const open = Boolean(anchorEl);
@@ -49,7 +57,11 @@ export default function TeamCard(props) {
                         <Typography>EQUIPO {id + 1}</Typography>
                         <div style={{ display: "flex" }}>
                             <p style={{ fontSize: "12px" }}>Equipación: </p>
-                            <IconButton aria-describedby={secondaryId} variant="contained" onClick={handleClick}>
+                            <IconButton
+                                aria-describedby={secondaryId}
+                                variant="contained"
+                                onClick={handleClick}
+                            >
                                 <div style={selectedColorCircleStyles} />
                             </IconButton>
                         </div>
@@ -57,7 +69,12 @@ export default function TeamCard(props) {
                 </Typography>
                 {team.map((team) => {
                     return (
-                        <Typography key={team + "Member"} variant="span" component="div" sx={{ fontSize: "1.2em" }}>
+                        <Typography
+                            key={team + "Member"}
+                            variant="span"
+                            component="div"
+                            sx={{ fontSize: "1.2em" }}
+                        >
                             {team}
                         </Typography>
                     );
@@ -91,7 +108,10 @@ export default function TeamCard(props) {
                             return (
                                 <div
                                     key={color}
-                                    onClick={() => setSelectedColor(color)}
+                                    onClick={() => {
+                                        setSelectedColor(color);
+                                        handleClose();
+                                    }}
                                     style={{
                                         width: "20px",
                                         height: "20px",
@@ -105,7 +125,6 @@ export default function TeamCard(props) {
                                 />
                             );
                         })}
-                        ;
                     </div>
                 </Popover>
             </CardContent>
