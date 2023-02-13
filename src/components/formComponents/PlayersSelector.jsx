@@ -5,8 +5,9 @@ import TextField from "@mui/material/TextField";
 import { Grid } from "@mui/material";
 import { formContext } from "../../contexts/FormsContext";
 
+
 export default function PlayersSelector() {
-    const { addElement } = useContext(formContext);
+    const { addElement, dataForm } = useContext(formContext);
     const [value, setValue] = useState([]);
     const [inputValue, setInputValue] = useState("");
     const [storagedOptions, setStoragedOptions] = useState([]);
@@ -32,12 +33,7 @@ export default function PlayersSelector() {
         chips.pop();
 
         if (chips.length > 0) {
-            setValue(
-                value
-                    .concat(chips)
-                    .map((x) => x.trim())
-                    .filter((x) => x)
-            );
+            setValue( value.concat(chips).map((x) => x.trim()).filter((x) => x) );
         } else {
             setInputValue(newInputValue);
         }
@@ -49,7 +45,6 @@ export default function PlayersSelector() {
         const { key, type } = event;
         const word = inputValue.split(SEPARATOR);
         const lastWord = word[word.length - 1];
-        console.log("----->> lastOption: ", lastWord);
 
         if (key === "Enter" || key === "Tab" || type === "blur") {
             setValue(value.concat(lastWord).filter((x) => x));
@@ -86,7 +81,10 @@ export default function PlayersSelector() {
             situation === "selectOption" ||
             situation === "clear"
         ) {
-            setInputValue("");
+            setInputValue(" ");
+            setTimeout(() => {
+                setInputValue("");
+            }, 1);
         }
         setValue(newValue);
         handleChange();
@@ -97,12 +95,14 @@ export default function PlayersSelector() {
         handleChange();
     }, [inputValue]);
 
-    // Almacena los jugadores en el localStorage
+    // Almacena los jugadores en el localStorage que no estén en el array de jugadores
     useEffect(() => {
         const storedData = localStorage.getItem("shuffledPlayers");
         const shuffledPlayers = storedData ? JSON.parse(storedData) : [];
-        setStoragedOptions(shuffledPlayers);
-    }, []);
+        const playersChosen = dataForm.players || [];
+        const playersForOptions = shuffledPlayers.filter(x => !playersChosen.includes(x));
+        setStoragedOptions(playersForOptions);
+    }, [inputValue]);
 
     return (
         <Grid

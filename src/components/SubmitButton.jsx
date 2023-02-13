@@ -4,11 +4,13 @@ import { formContext } from "../contexts/FormsContext";
 import MainForm from "./MainForm";
 import ResultToShare from "./ResultToShare";
 import Tooltip from "@mui/material/Tooltip";
+import FormHelperText from "@mui/material/FormHelperText";
 
 export default function SubmitButton() {
     const [inputValue, setInputValue] = useState(true);
     const { dataForm } = useContext(formContext);
     const [isValid, setIsValid] = useState(false);
+    const [repeatedPlayers, setRepeatedPlayers] = useState(false);
 
     const handleSubmit = (event) => {
         event.preventDefault();
@@ -23,9 +25,27 @@ export default function SubmitButton() {
                 dataForm.players.length > dataForm.teams &&
                 dataForm.players.every(
                     (player, index, self) => self.indexOf(player) === index
-                )
+                ) && !repeatedPlayers
         );
     }, [dataForm.players, dataForm.teams]);
+
+    // Un useEffect para evaluar si en el dataForm hay jugadores repetidos
+    useEffect(() => {
+        if (dataForm.players) {
+            const players = dataForm.players.map((player) =>
+                player.toLowerCase() // ESTO NO TERMINA DE FUNCIONAR!!!!!!!!!!!
+            );
+            const duplicatedPlayers = players.filter(
+                (player, index) => players.indexOf(player) !== index
+            );
+            if (duplicatedPlayers.length > 0) {
+                setRepeatedPlayers(true);
+            } else {
+                setRepeatedPlayers(false);
+            }
+            console.log("repeatedPlayers: ", repeatedPlayers)
+        }
+    }, [dataForm]);
 
     return (
         <>
@@ -46,22 +66,23 @@ export default function SubmitButton() {
                             </Grid>
                         ) : (
                             <Grid item xs={12}>
-                                <Tooltip
-                                    title="Sin participantes repetidos y al menos 3 participantes"
-                                    placement="top"
-                                    arrow
+                                <Button
+                                    disabled
+                                    size="large"
+                                    fullWidth
+                                    variant="contained"
                                 >
-                                    <span>
-                                        <Button
-                                            disabled
-                                            size="large"
-                                            fullWidth
-                                            variant="contained"
-                                        >
-                                            FALTAN DATOS REQUERIDOS
-                                        </Button>
-                                    </span>
-                                </Tooltip>
+                                    FALTAN DATOS REQUERIDOS
+                                </Button>
+                                {repeatedPlayers ? (
+                                    <FormHelperText id="component-helper-text" error>
+                                        * Hay jugadores repetidos
+                                    </FormHelperText>
+                                ) : (
+                                    <FormHelperText id="component-helper-text" error>
+                                        * Faltan jugadores o equipos
+                                    </FormHelperText>
+                                )}
                             </Grid>
                         )}
                     </Grid>
