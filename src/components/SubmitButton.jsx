@@ -12,12 +12,14 @@ export default function SubmitButton() {
     const [isValid, setIsValid] = useState(false);
     const [repeatedPlayers, setRepeatedPlayers] = useState(false);
 
+    // Función para manejar el evento de submit
     const handleSubmit = (event) => {
         event.preventDefault();
         setInputValue(false);
         console.log("Form submitted: ", inputValue);
     };
 
+    // Un useEffect para evaluar si el formulario es válido
     useEffect(() => {
         setIsValid(
             dataForm.teams > 1 &&
@@ -25,7 +27,8 @@ export default function SubmitButton() {
                 dataForm.players.length > dataForm.teams &&
                 dataForm.players.every(
                     (player, index, self) => self.indexOf(player) === index
-                ) && !repeatedPlayers
+                ) &&
+                !repeatedPlayers
         );
     }, [dataForm.players, dataForm.teams]);
 
@@ -33,7 +36,7 @@ export default function SubmitButton() {
     useEffect(() => {
         if (dataForm.players) {
             const players = dataForm.players.map((player) =>
-                player.toLowerCase() // ESTO NO TERMINA DE FUNCIONAR!!!!!!!!!!!
+                player.toLowerCase()
             );
             const duplicatedPlayers = players.filter(
                 (player, index) => players.indexOf(player) !== index
@@ -43,7 +46,6 @@ export default function SubmitButton() {
             } else {
                 setRepeatedPlayers(false);
             }
-            console.log("repeatedPlayers: ", repeatedPlayers)
         }
     }, [dataForm]);
 
@@ -75,11 +77,17 @@ export default function SubmitButton() {
                                     FALTAN DATOS REQUERIDOS
                                 </Button>
                                 {repeatedPlayers ? (
-                                    <FormHelperText id="component-helper-text" error>
+                                    <FormHelperText
+                                        id="component-helper-text"
+                                        error
+                                    >
                                         * Hay jugadores repetidos
                                     </FormHelperText>
                                 ) : (
-                                    <FormHelperText id="component-helper-text" error>
+                                    <FormHelperText
+                                        id="component-helper-text"
+                                        error
+                                    >
                                         * Faltan jugadores o equipos
                                     </FormHelperText>
                                 )}
