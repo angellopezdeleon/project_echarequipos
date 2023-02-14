@@ -13,7 +13,6 @@ export default function Footer() {
           width: "100%",
           height: "50px",
           backgroundColor: "#0d47a1",
-          margin: "20px auto 0 auto",
           display: "flex",
           justifyContent: 'center',
           alignItems: 'center',

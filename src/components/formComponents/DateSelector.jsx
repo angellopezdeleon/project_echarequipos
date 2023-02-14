@@ -43,7 +43,7 @@ export default function DateSelector() {
   function handleAccepted(event) {
     setValue(event);
     const date =
-      "el " + event.$D + " de " + monthSelector(event.$M) + " de " + event.$y;
+      "El " + event.$D + " de " + monthSelector(event.$M) + " de " + event.$y;
     const completeDate = event.$d;
     let newUserData = {
       day: date,

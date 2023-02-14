@@ -65,7 +65,7 @@ export default function SubmitButton() {
     return (
         <>
             {inputValue ? (
-                <div>
+                <div style={{ margin: 24 }} >
                     <MainForm />
                     <Grid sx={{ mt: 3 }}>
                         {isValid ? (

@@ -1,7 +1,7 @@
 import React from "react";
 
 const h2Style = {
-  margin: "40px auto 20px auto",
+  margin: "40px auto auto auto",
   width: "75px",
   maxWidth: "100%",
   color: "white",

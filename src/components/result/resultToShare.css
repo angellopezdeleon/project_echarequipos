@@ -1,6 +1,31 @@
-.containResults{
-	display: flex;
-	flex-direction: column;
-	justify-content: center;
-	align-items: center;
+.containResults {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    overflow: hidden;
+    padding: 24px;
+}
+
+.cards {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+    max-width: 1200px;
+}
+
+.backgroundText {
+    position: absolute;
+    top: -100;
+    left: -100;
+    z-index: 0;
+    opacity: 0.04;
+    font-size: 50px;
+    font-weight: bold;
+    transform: rotate(-13deg);
+    line-height: 0.8;
+    width: 200%;
+    height: 200%;
 }
