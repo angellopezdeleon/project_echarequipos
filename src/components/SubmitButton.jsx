@@ -95,7 +95,7 @@ export default function SubmitButton() {
                                     </FormHelperText>
                                 ) : (
                                     <FormHelperText id="component-helper-text" error>
-                                        * Faltan jugadores o equipos
+                                        * Debe haber más jugadores que equipos para poder realizar el sorteo
                                     </FormHelperText>
                                 )}
                             </Grid>
