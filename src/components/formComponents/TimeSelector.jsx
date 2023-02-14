@@ -37,7 +37,7 @@ export default function TimeSelector() {
           value={value}
           onChange={handleChange}
           onAccept={handleAccepted}
-          renderInput={(params) => <TextField {...params} />}
+          renderInput={(params) => <TextField {...params} autoComplete="off" />}
           ampm={false}
         />
       </Stack>
