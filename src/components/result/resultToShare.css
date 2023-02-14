@@ -3,9 +3,11 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    text-align: center;
     position: relative;
     overflow: hidden;
     padding: 24px;
+    width: 100%;
 }
 
 .cards {
@@ -26,6 +28,6 @@
     font-weight: bold;
     transform: rotate(-13deg);
     line-height: 0.8;
-    width: 200%;
-    height: 200%;
+    width: 250%;
+    height: 250%;
 }

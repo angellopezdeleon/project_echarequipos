@@ -19,7 +19,7 @@ function ResultToShare() {
         .split("-")
         .filter((word) => word.length > 0)
         .map((word, index) => {
-           return word
+            return word;
         })
         .join("-");
 
@@ -42,7 +42,14 @@ function ResultToShare() {
         <div className="containResults">
             {/* Contenido */}
             {dataForm.day ? (
-                <h1 style={{ zIndex: 1 }}>PARTIDO DE {dataForm.sport.toUpperCase()}</h1>
+                <h1 style={{ zIndex: 1 }}>
+                    {" "}
+                    <span style={{ fontSize: "40px" }}>PARTIDO </span>
+                    <span style={{ fontSize: "33px" }}>DE </span>
+                    <span style={{ fontSize: "50px" }}>
+                        {dataForm.sport.toUpperCase()}
+                    </span>
+                </h1>
             ) : null}
             <div
                 style={{
@@ -52,16 +59,25 @@ function ResultToShare() {
                     zIndex: 1,
                 }}
             >
-                {dataForm.day ? <p style={{ zIndex: 1 }}> {dataForm.day}</p> : null}
+                {dataForm.day ? (
+                    <p style={{ zIndex: 1 }}>
+                        {" "}
+                        <span style={{ fontSize: "24px", fontStyle: "bold" }}>{dataForm.day}</span>{" "}
+                    </p>
+                ) : null}
                 {dataForm.time ? (
-                    <p style={{ zIndex: 1 }}>, a las {dataForm.time}</p>
+                    <p style={{ zIndex: 1 }}>
+                        , a las <span style={{ fontSize: "24px" }}>{dataForm.time}</span>
+                    </p>
                 ) : null}
             </div>
             <div className="cards">
                 <PlayersDuel props={dataForm} />
             </div>
-            {dataForm.address ? <p style={{ zIndex: 1 }}>En {dataForm.address}</p> : null}
-            {dataForm.sport ? <q style={{ fontStyle: "italic", zIndex: 1 }}>{data.phrase}</q> : null}
+            {dataForm.address ? <p style={{ zIndex: 1, fontSize: "24px" }}>En {dataForm.address}</p> : null}
+            {dataForm.sport ? (
+                <q style={{ fontStyle: "italic", zIndex: 1 }}>{data.phrase}</q>
+            ) : null}
 
             {/* Fondo */}
             <div className="backgroundText">{text}</div>

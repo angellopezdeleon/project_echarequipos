@@ -3,7 +3,6 @@ import { Grid, Button } from "@mui/material";
 import { formContext } from "../contexts/FormsContext";
 import MainForm from "./MainForm";
 import ResultToShare from "./ResultToShare";
-import Tooltip from "@mui/material/Tooltip";
 import FormHelperText from "@mui/material/FormHelperText";
 
 export default function SubmitButton() {
@@ -65,7 +64,7 @@ export default function SubmitButton() {
     return (
         <>
             {inputValue ? (
-                <div style={{ margin: 24 }} >
+                <div style={{ margin: 24, maxWidth: 1000, }} >
                     <MainForm />
                     <Grid sx={{ mt: 3 }}>
                         {isValid ? (
