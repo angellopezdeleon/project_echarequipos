@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
 import Typography from "@mui/material/Typography";
@@ -21,16 +21,6 @@ export default function TeamCard(props) {
 
     let { id, team } = props;
 
-    const selectedColorCircleStyles = {
-        width: "20px",
-        height: "20px",
-        borderRadius: "50%",
-        backgroundColor: selectedColor,
-        display: "inline-block",
-        border: "2px solid #DFDFDF",
-        clipPath: "circle(50%)",
-    };
-
     const handleClose = () => {
         setAnchorEl(null);
     };
@@ -42,8 +32,18 @@ export default function TeamCard(props) {
     const open = Boolean(anchorEl);
     const secondaryId = open ? "simple-popover" : undefined;
 
+    const selectedColorCircleStyles = {
+        width: "20px",
+        height: "20px",
+        borderRadius: "50%",
+        backgroundColor: colors[id],
+        display: "inline-block",
+        border: "2px solid #DFDFDF",
+        clipPath: "circle(50%)",
+    };
+
     return (
-        <Card sx={{ margin: 1 }}>
+        <Card key={id} sx={{ margin: 1 }}>
             <CardContent>
                 <Typography sx={{ fontSize: "1em" }} color="text.secondary" gutterBottom>
                     <div

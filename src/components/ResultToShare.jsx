@@ -15,13 +15,16 @@ function ResultToShare() {
     };
 
     // Crear la cadena de texto
-    const text = repeatWord(dataForm.sport.toUpperCase(), 300)
+    const text = dataForm.sport ? 
+        (repeatWord(dataForm.sport.toUpperCase(), 300)
         .split("-")
         .filter((word) => word.length > 0)
         .map((word, index) => {
             return word;
         })
-        .join("-");
+        .join("-"))
+        :
+        null;
 
     useEffect(() => {
         if (sports.includes(dataForm.sport)) {
@@ -35,7 +38,6 @@ function ResultToShare() {
                     console.error(error);
                 });
         }
-        console.log("text: ", text);
     }, []);
 
     return (
@@ -62,7 +64,9 @@ function ResultToShare() {
                 {dataForm.day ? (
                     <p style={{ zIndex: 1 }}>
                         {" "}
-                        <span style={{ fontSize: "24px", fontStyle: "bold" }}>{dataForm.day}</span>{" "}
+                        <span style={{ fontSize: "24px", fontStyle: "bold" }}>
+                            {dataForm.day}
+                        </span>{" "}
                     </p>
                 ) : null}
                 {dataForm.time ? (
@@ -74,7 +78,9 @@ function ResultToShare() {
             <div className="cards">
                 <PlayersDuel props={dataForm} />
             </div>
-            {dataForm.address ? <p style={{ zIndex: 1, fontSize: "24px" }}>En {dataForm.address}</p> : null}
+            {dataForm.address ? (
+                <p style={{ zIndex: 1, fontSize: "24px" }}>En {dataForm.address}</p>
+            ) : null}
             {dataForm.sport ? (
                 <q style={{ fontStyle: "italic", zIndex: 1 }}>{data.phrase}</q>
             ) : null}
