@@ -2,11 +2,11 @@ import React, { useEffect, useState, useContext } from "react";
 import { formContext } from "../contexts/FormsContext";
 import PlayersDuel from "./result/PlayersDuel";
 import getQuoteBySport from "../services/quotesAPI";
-import "./result/resultToShare.css";
+import "./resultToShare.css";
 
 function ResultToShare() {
     const { dataForm } = useContext(formContext);
-    const [data, setData] = useState({});
+    const [quote, setQuote] = useState({});
     const sports = ["Fútbol", "Baloncesto", "Deporte de raqueta"];
 
     // Función para repetir la palabra
@@ -30,7 +30,7 @@ function ResultToShare() {
         if (sports.includes(dataForm.sport)) {
             getQuoteBySport(dataForm.sport)
                 .then((respuestaDatos) => {
-                    setData(
+                    setQuote(
                         respuestaDatos[Math.floor(Math.random() * respuestaDatos.length)]
                     );
                 })
@@ -43,7 +43,7 @@ function ResultToShare() {
     return (
         <div className="containResults">
             {/* Contenido */}
-            {dataForm.day ? (
+            {dataForm.sport ? (
                 <h1 style={{ zIndex: 1 }}>
                     {" "}
                     <span style={{ fontSize: "40px" }}>PARTIDO </span>
@@ -81,8 +81,8 @@ function ResultToShare() {
             {dataForm.address ? (
                 <p style={{ zIndex: 1, fontSize: "24px" }}>En {dataForm.address}</p>
             ) : null}
-            {dataForm.sport ? (
-                <q style={{ fontStyle: "italic", zIndex: 1 }}>{data.phrase}</q>
+            {quote.phrase ? (
+                <q style={{ fontStyle: "italic", zIndex: 1 }}>{quote.phrase}</q>
             ) : null}
 
             {/* Fondo */}
