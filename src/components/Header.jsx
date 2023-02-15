@@ -6,7 +6,6 @@ const h2Style = {
   maxWidth: "100%",
   color: "white",
   cursor: "pointer",
-  fontSize: "20px",
   display: "flex",
   flexDirection: "column",
 };
@@ -17,15 +16,14 @@ const headerStyle = {
 };
 
 const spanStyle = {
-  fontSize: "17px",
-  padding: "0 0 15px 0",
-  alginItems: "center",
+  fontSize: "12px",
 };
 
 const h2 = {
-  fontSize: "24px",
-  padding: "0 0 15px 0",
+  fontSize: "28px",
   margin: "-5px",
+  lineHeight: "1.1",
+  fontWeight: "bold",
 };
 
 export default function Header() {
@@ -37,9 +35,7 @@ export default function Header() {
   return (
     <div style={headerStyle}>
         <div style={h2Style} onClick={handleLogoClick}>
-          <h2 style={h2}>Echar</h2>
-          <h2 style={h2}>Equipos</h2>
-          <h2 style={h2}><span style={spanStyle}>⚽</span> com</h2>
+          <p style={h2}>Echar Equipos <span style={spanStyle}>⚽</span> com</p>
         </div>
     </div>
   );
