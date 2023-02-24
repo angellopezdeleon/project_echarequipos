@@ -4,6 +4,7 @@ import CardContent from "@mui/material/CardContent";
 import Typography from "@mui/material/Typography";
 import Popover from "@mui/material/Popover";
 import IconButton from "@mui/material/IconButton";
+import { margin } from "@mui/system";
 
 const colors = [
     "#000000",
@@ -45,7 +46,7 @@ export default function TeamCard(props) {
     return (
         <Card key={id} sx={{ margin: 1 }}>
             <CardContent>
-                <Typography sx={{ fontSize: "1em" }} color="text.secondary" gutterBottom>
+                <div>
                     <div
                         style={{
                             display: "flex",
@@ -54,9 +55,9 @@ export default function TeamCard(props) {
                             flexWrap: "wrap",
                         }}
                     >
-                        <Typography>EQUIPO {id + 1}</Typography>
-                        <div style={{ display: "flex" }}>
-                            <p style={{ fontSize: "12px" }}>Equipación: </p>
+                        <span>EQUIPO {id + 1}</span>
+                        <div style={{ display: "flex", alignItems: "center" }}>
+                            <span style={{ fontSize: "12px" }}>Equipación: </span>
                             <IconButton
                                 aria-describedby={secondaryId}
                                 variant="contained"
@@ -66,15 +67,11 @@ export default function TeamCard(props) {
                             </IconButton>
                         </div>
                     </div>
-                </Typography>
+                </div>
+
                 {team.map((teamMember) => {
                     return (
-                        <Typography
-                            key={teamMember + "Member"}
-                            variant="span"
-                            component="div"
-                            sx={{ fontSize: "1.2em" }}
-                        >
+                        <Typography key={teamMember} component="div">
                             {teamMember}
                         </Typography>
                     );
