@@ -16,7 +16,7 @@ const colors = [
 ];
 
 export default function TeamCard(props) {
-    const [selectedColor, setSelectedColor] = useState(colors[0]);
+    const [selectedColor, setSelectedColor] = useState(null);
     const [anchorEl, setAnchorEl] = useState(null);
 
     let { id, team } = props;
@@ -36,7 +36,7 @@ export default function TeamCard(props) {
         width: "20px",
         height: "20px",
         borderRadius: "50%",
-        backgroundColor: colors[id],
+        backgroundColor: selectedColor ? selectedColor : colors[id],
         display: "inline-block",
         border: "2px solid #DFDFDF",
         clipPath: "circle(50%)",
@@ -67,15 +67,15 @@ export default function TeamCard(props) {
                         </div>
                     </div>
                 </Typography>
-                {team.map((team) => {
+                {team.map((teamMember) => {
                     return (
                         <Typography
-                            key={team + "Member"}
+                            key={teamMember + "Member"}
                             variant="span"
                             component="div"
                             sx={{ fontSize: "1.2em" }}
                         >
-                            {team}
+                            {teamMember}
                         </Typography>
                     );
                 })}
