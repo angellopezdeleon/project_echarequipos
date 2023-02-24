@@ -36,7 +36,7 @@ export default function TeamCard(props) {
         width: "20px",
         height: "20px",
         borderRadius: "50%",
-        backgroundColor: selectedColor ? selectedColor : colors[id],
+        backgroundColor: selectedColor || colors[id],
         display: "inline-block",
         border: "2px solid #DFDFDF",
         clipPath: "circle(50%)",
