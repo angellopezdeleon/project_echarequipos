@@ -131,7 +131,7 @@ export default function PlayersSelector() {
                     noOptionsText="No hay opciones"
                     onPaste={handleInput}
                     onChange={handleOnChange}
-                    onBlur={() => handleInput(inputValue)}
+                    onBlur={(event) => handleInput(event, inputValue)}
                     onKeyDown={(event) => handleInput(event, inputValue)}
                     onInputChange={createChips}
                     renderInput={(params) => (
