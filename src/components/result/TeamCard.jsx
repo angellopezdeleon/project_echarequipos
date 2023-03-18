@@ -7,14 +7,17 @@ import IconButton from "@mui/material/IconButton";
 import { margin } from "@mui/system";
 
 const colors = [
-    "#000000",
-    "#ffffff",
-    "#7b9fe2",
-    "#e84a33",
-    "#fee65f",
-    "#9be674",
-    "#f078ea",
-];
+    "#000000", // Negro
+    "#ffffff", // Blanco
+    "#7b9fe2", // Azul claro
+    "#e84a33", // Rojo anaranjado
+    "#fee65f", // Amarillo claro
+    "#9be674", // Verde claro
+    "#f078ea", // Rosa
+    "#1e9a8a", // Verde azulado
+    "#c68c53", // Marrón claro
+    "#9370db", // Púrpura medio
+    ];
 
 export default function TeamCard(props) {
     const [selectedColor, setSelectedColor] = useState(null);
