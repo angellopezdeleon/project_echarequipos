@@ -16,7 +16,7 @@ function ResultToShare() {
 
     // Crear la cadena de texto
     const text = dataForm.sport ? 
-        (repeatWord(dataForm.sport.toUpperCase(), 300)
+        (repeatWord(dataForm.sport.toUpperCase(), 1000)
         .split("-")
         .filter((word) => word.length > 0)
         .map((word, index) => {
@@ -82,7 +82,7 @@ function ResultToShare() {
                 <p style={{ zIndex: 1, fontSize: "24px" }}>En {dataForm.address}</p>
             ) : null}
             {quote.phrase ? (
-                <q style={{ fontStyle: "italic", zIndex: 1 }}>{quote.phrase}</q>
+                <q style={{ fontStyle: "italic", zIndex: 1, paddingTop: 14 }}>{quote.phrase}</q>
             ) : null}
 
             {/* Fondo */}
