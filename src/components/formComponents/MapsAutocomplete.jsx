@@ -10,8 +10,7 @@ import throttle from "lodash/throttle";
 import { useContext } from "react";
 import { formContext } from "../../contexts/FormsContext";
 
-// This is a personal key and it is securized, please use your own.
-const GOOGLE_MAPS_API_KEY = "AIzaSyCFQDW_yw-lAKMxthLDbwozYvhg4iFdm6M";
+const GOOGLE_MAPS_API_KEY = "GOOGLE_API";
 
 function loadScript(src, position, id) {
   if (!position) {
